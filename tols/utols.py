@@ -1,6 +1,6 @@
 '''
+`requests`
 `hashname` `smd5` `fmd5` `urlencode` `urldecode`
-
 `HEADERS`
 
 	>>> hashname(x:str)->str
@@ -8,7 +8,8 @@
 	>>> fmd5(pth:str)->str
 '''
 
-from tols._code import urlencode,urldecode
+import requests
+from tols._other import urlencode,urldecode
 from tols._u import hashname,smd5,fmd5
 
 HEADERS={
