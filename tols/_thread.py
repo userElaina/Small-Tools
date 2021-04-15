@@ -7,12 +7,16 @@ def uq(q,l:set_type)->None:
 	for i in l:
 		q.put(i)
 
-def qthread(l:set_type,f,n:str)->None:
+def throws(f,args:tuple=tuple())->None:
+	_t=threading.Thread(target=f,args=args)
+	_t.setDaemon(True)
+	_t.start()
+	return _t
+
+def qthread(l:set_type,f,n:int,waits:int=0)->None:
 	_threads=[]
 	q=queue.Queue(maxsize=n)
-	_main=threading.Thread(target=uq,args=(q,l,))
-	_main.setDaemon(True)
-	_main.start()
+	throws(uq,args=(q,l,))
 	while q.qsize()>0:
 		while len(_threads)>=n:
 			for i in _threads.copy():
@@ -21,10 +25,9 @@ def qthread(l:set_type,f,n:str)->None:
 		args=q.get()
 		if not isinstance(args,tuple):
 			args=(args,)
-		task=threading.Thread(target=f,args=args)
-		task.setDaemon(True)
-		task.start()
-		_threads.append(task)
+		if waits:
+			slp(waits)
+		_threads.append(throws(f,args))
 	for i in _threads:
 		i.join()
 

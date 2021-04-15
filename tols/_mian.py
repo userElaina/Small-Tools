@@ -1,5 +1,5 @@
 import re
-# import os
+import os
 import time
 from typing import Union
 from json import loads,dumps
@@ -79,6 +79,14 @@ def opens(pth:str,s:str='')->str:
 	except FileNotFoundError:
 		open(pth,'w').write(s)
 	return s
+
+def openls(pth:str)->list:
+	s=''
+	try:
+		return [i for i in open(pth,'r',encoding='utf-8').read().split('\n') if i!='']
+	except FileNotFoundError:
+		open(pth,'w').write(s)
+	return list()
 
 def openjs(pth:str)->dict:
 	try:

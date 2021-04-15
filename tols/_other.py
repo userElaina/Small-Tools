@@ -12,7 +12,7 @@ def urlencode(s:str)->str:
 	return quote_from_bytes(bencode(s))
 
 def urldecode(s:str)->str:
-	return unquote_to_bytes(bencode(s)).encode(errors='backslashreplace')
+	return unquote_to_bytes(bencode(s)).decode(errors='backslashreplace')
 
 def uniencode(s:str)->str:
 	return s.encode(encoding='unicode_escape').decode()

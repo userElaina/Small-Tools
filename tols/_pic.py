@@ -41,7 +41,7 @@ def dhash(pth:str)->int:
 	return ans
 
 def hm_d(h1:int,h2:int)->int:
-    h,d=0,h1^h2
+    h,d=0,int(h1)^int(h2)
     while d:
         h+=1
         d&=d-1

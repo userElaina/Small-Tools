@@ -1,5 +1,5 @@
 '''
-`trys` `test` `jsot` `sve` `opens` `openjs`
+`trys` `test` `jsot` `sve` `opens` `openls` `openjs`
 
 `pt` `tm` `lot` `sh` `rd` `slp`
 
@@ -29,6 +29,7 @@
 	>>> jsot(js:dict,pth=None,indent='\t',onlyascii=False,sort=False,log=False)->str
 	>>> sve(pth:str,x:all)->None
 	>>> opens(pth:str,s='')->str
+	>>> openls(pth:str)->list:
 	>>> openjs(pth:str)->dict:
 '''
 

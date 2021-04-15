@@ -7,6 +7,6 @@
 	>>> qthread(l:set_type,f,n:str)->None
 '''
 
-from tols._thread import uq,qthread
+from tols._thread import uq,qthread,throws
 
 print('import',__name__,'succ')

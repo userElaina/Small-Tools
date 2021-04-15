@@ -1,7 +1,8 @@
 import requests
 
-from tols._hash import hashcode
+from tols._mian import *
 from tols._base import basecode
+from tols._hash import hashcode
 
 def hashname(x:str)->str:
 	return basecode(int(hashcode(x,'sha224'),16),36,normal=False).zfill(175)
