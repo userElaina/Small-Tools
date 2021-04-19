@@ -78,31 +78,32 @@ def chose(s,r,w):
 	flg=True
 	if r:
 		r=r.replace('zh','zh-CN').replace('jp','ja')
-		if w:
-			w=w.replace('zh','zh-CN').replace('jp','ja')
-		else:
-			if r=='en':w='zh-CN'
-			if r=='zh-CN':w='en'
-	else:
-		if w:
-			if w=='en':r='zh-CN'
-			if w=='zh-CN':r='en'
-		else:
-			r='zh-CN'
-			w='en'
-			j=trans(s,r=r,w=w)
-			if j==None: 									r,w=w,r
-			if isinstance(j[0][-1][-1],list):				r,w=w,r
-			if ''.join(map(lambda x:x[0],j[0][:-1]))=='':	r,w=w,r
-			if ''.join(map(lambda x:x[2][0][0],j[5]))==s:	r,w=w,r
+	if w:
+		w=w.replace('zh','zh-CN').replace('jp','ja')
+	if r and not w:
+		w='en' if r=='zh-CN' else 'zh-CN'
+	if w and not r:
+		r='en' if w=='zh-CN' else 'zh-CN'
+	if (not r) and (not w):
+		r='zh-CN'
+		w='en'
+		j=trans(s,r=r,w=w)
+		if j==None: 									r,w=w,r
+		if isinstance(j[0][-1][-1],list):				r,w=w,r
+		if ''.join(map(lambda x:x[0],j[0][:-1]))=='':	r,w=w,r
+		if ''.join(map(lambda x:x[2][0][0],j[5]))==s:	r,w=w,r
 	return r,w
 
-def gtrans(s:str,r:str=None,w:str=None):
+def gtrans(s:str,r:str=None,w:str=None)->list:
 	if s.replace('\n','').replace('\t','').replace('\r','').replace(' ','')=='':
 		return ''
 	s=re.sub('^[\s]+','',s)
 	r,w=chose(s,r,w)
 	ms=js2ms(trans(s,r,w))
 	return [ms,r,w]
+
+def strans(s:str,r:str=None,w:str=None)->str:
+	ms,r,w=gtrans(s,r,w)
+	return r+':\n'+s+'\n\n'+w+':\m'+ms
 
 print('import',__name__,'succ')
