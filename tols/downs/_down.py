@@ -8,6 +8,10 @@ HEADERS={
 	'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
 }
 
+gh=lambda u,px,h:requests.head(u,proxies=px,headers=h) if px else requests.head(u,headers=h)
+gt=lambda u,px,h:requests.get(u,proxies=px,headers=h) if px else requests.get(u,headers=h)
+gts=lambda u,px,h:requests.get(u,proxies=px,headers=h,stream=True) if px else requests.get(u,headers=h,stream=True)
+
 
 class nDown:
 	def __init__(
@@ -49,7 +53,7 @@ class nDown:
 		self.print_log=print_log
 
 		exist=list(os.walk(pth))[0][-1]
-		self.l=[i for i in range(self.le) if self.name[i] not in exist]
+		self.l=[i for i in range(self.le) if (self.name[i] not in exist and self.name[i]+'.sve_def' not in exist)]
 		self.__pt(len(self.l))
 		self.__mian=nThread(n=n,waits=waits)
 	
@@ -72,19 +76,19 @@ class nDown:
 			if os.path.exists(nm):
 				tsz=os.path.getsize(nm)
 				h['Range']='bytes='+str(tsz)+'-'
-				self.__pt(i,'from',tsz>>20)
+				self.__pt(i,'from',tsz>>20,'to',self.size[i]>>20)
 			else:
-				self.__pt(i,'from -1')
-			res=requests.get(url,proxies=self.proxies,headers=h,stream=True)
+				self.__pt(i,'from -1 to',self.size[i]>>20)
+			res=gts(url,self.proxies,h)
 			with open(nm,'ab') as f:
 				for chunk in res.iter_content(chunk_size=self.chunk_size):
 					if chunk:
 						f.write(chunk)
 						f.flush()
-			od='mv "'+nm+'" "'+name+'"'
+			od='move "'+nm+'" "'+name+'"'
 			sh(od)
 		else:
-			res=requests.get(url,proxies=self.proxies,headers=h)
+			res=gt(url,self.proxies,h)
 			open(name,'wb').write(res.content)
 
 		return float(time.time())-a
@@ -112,6 +116,7 @@ class nDown:
 
 		try:
 			res=requests.head(url,proxies=self.proxies,headers=h)
+			# self.__pt(url)
 			codes=int(res.status_code)
 		except:
 			codes=-1
