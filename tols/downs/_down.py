@@ -2,11 +2,12 @@ import os
 import time
 import requests
 from os import system as sh
-from tols.down._thread import nThread,slp
+from tols.downs._thread import nThread,slp
 
 HEADERS={
 	'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
 }
+
 
 class nDown:
 	def __init__(
@@ -14,6 +15,7 @@ class nDown:
 		url:list,
 		name:list,
 		pth:str,
+		proxies:dict=None,
 		h1:list=HEADERS,
 		h2:list=HEADERS,
 		fu=None,
@@ -41,6 +43,7 @@ class nDown:
 		self.h1=h1
 		self.h2=h2
 		self.fu=fu
+		self.proxies=proxies
 		self.stream_size=stream_size
 		self.chunk_size=chunk_size
 		self.print_log=print_log
@@ -72,7 +75,7 @@ class nDown:
 				self.__pt(i,'from',tsz>>20)
 			else:
 				self.__pt(i,'from -1')
-			res=requests.get(url,headers=h,stream=True)
+			res=requests.get(url,proxies=self.proxies,headers=h,stream=True)
 			with open(nm,'ab') as f:
 				for chunk in res.iter_content(chunk_size=self.chunk_size):
 					if chunk:
@@ -81,7 +84,7 @@ class nDown:
 			od='mv "'+nm+'" "'+name+'"'
 			sh(od)
 		else:
-			res=requests.get(url,headers=h)
+			res=requests.get(url,proxies=self.proxies,headers=h)
 			open(name,'wb').write(res.content)
 
 		return float(time.time())-a
@@ -108,7 +111,7 @@ class nDown:
 			h=h1(url,name)
 
 		try:
-			res=requests.head(url,headers=h)
+			res=requests.head(url,proxies=self.proxies,headers=h)
 			codes=int(res.status_code)
 		except:
 			codes=-1
@@ -120,7 +123,7 @@ class nDown:
 			try:
 				if not isinstance(h2,dict):
 					h=h2(url,name,h.copy())
-				res=requests.head(self.u2[i],headers=h)
+				res=requests.head(self.u2[i],proxies=self.proxies,headers=h)
 				codes=int(res.status_code)
 			except:
 				codes=-1

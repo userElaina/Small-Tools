@@ -17,6 +17,7 @@
 		h1:list=HEADERS,
 		h2:list=HEADERS,
 		fu=None,
+		proxies:dict=None,
 		stream_size:int=-1,
 		chunk_size:int=1<<20,
 		n:int=30,
