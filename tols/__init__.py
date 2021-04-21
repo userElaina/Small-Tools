@@ -1,9 +1,9 @@
 '''
-`trys` `test` `jsot` `sve` `opens` `openls` `openjs`
+`pt` `lot` `tm` `trys` `test`
 
-`pt` `tm` `lot`
+`jsot` `sve` `opens` `openls` `openjs`
 
-`re` `time` `Union` `sh` `rd` `slp`
+`os` `time` `json` `Union` `sh` `rd` `slp`
 
 `num` `set` `byte` `bytes` `in`
 
@@ -21,10 +21,9 @@
 	>>> [bytes] str,bytes,bytearray,memoryview,
 	>>> [in]    dict,[set],[bytes],
 
-	>>> pt(x)
-	>>> tm()->str
+	>>> pt(x)->None
 	>>> lot(l:list)->str
-	
+	>>> tm(x:float=None,_=False)->str:
 	>>> trys(s:all,c:type,default=None)->all
 	>>> test(f)->None
 	>>> jsot(js:dict,pth=None,indent='\t',onlyascii=False,sort=False,log=False)->str
