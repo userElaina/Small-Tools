@@ -22,15 +22,17 @@ in_type=Union[dict,set_type,bytes_type,]
 in_types=(dict,set_type,bytes_type,)
 
 
-def pt(x)->None:
+def pt(x:all)->None:
 	print(repr(x))
 
-def tm()->str:
-	return time.strftime('%Y%m%d%H%M%S',time.localtime())
-	
 def lot(l:list)->str:
 	return '\n'.join([str(i) for i in l])	
 
+def tm(x:float=None,_=False)->str:
+	if not x:
+		x=time.time()
+	return time.strftime('%Y-%m-%d_%H:%M:%S' if _ else '%Y%m%d%H%M%S',time.localtime(x))
+	
 def trys(c:type,s:all,default=None)->all:
 	try:
 		return c(s)
