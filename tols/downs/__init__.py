@@ -1,12 +1,11 @@
 '''
 `throws` `nThread` `nDown`
 
-	>>> throws(f,args:tuple)->None
+	>>> throws(f:function,args:tuple)->None
 	>>> nThread(
-		self,
 		n:int=20,
 		waits:int=0,
-		f=None,
+		f:function=None,
 		args:list=None,
 		fast:bool=False
 		)
@@ -16,13 +15,14 @@
 		pth:str,
 		h1:list=HEADERS,
 		h2:list=HEADERS,
-		fu=None,
+		fu:function=None,
 		proxies:dict=None,
 		stream_size:int=-1,
 		chunk_size:int=1<<20,
 		n:int=30,
 		waits:int=0,
 		print_log:bool=True,
+		test7z:bool=False,
 		)
 '''
 

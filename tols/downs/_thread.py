@@ -1,6 +1,7 @@
 import queue
 import threading
-from time import sleep as slp
+# from time import sleep as slp
+from tols._mian import *
 
 def throws(f,args:tuple=tuple())->None:
 	if not isinstance(args,tuple):

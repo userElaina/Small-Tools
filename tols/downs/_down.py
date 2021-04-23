@@ -1,8 +1,8 @@
-import os
-import time
+# import os
+# import time
+# from os import system as sh
 import requests
-from os import system as sh
-from tols.downs._thread import nThread,slp
+from tols.downs._thread import *
 
 HEADERS={
 	'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'
@@ -28,6 +28,7 @@ class nDown:
 		n:int=30,
 		waits:int=0,
 		print_log:bool=True,
+		test7z:bool=False,
 	):
 		if isinstance(url,str):
 			url=[url,]
@@ -51,9 +52,11 @@ class nDown:
 		self.stream_size=stream_size
 		self.chunk_size=chunk_size
 		self.print_log=print_log
+		self.test7z=test7z
 
 		exist=list(os.walk(pth))[0][-1]
 		self.l=[i for i in range(self.le) if (self.name[i] not in exist and self.name[i]+'.sve_def' not in exist)]
+		# self.l=[i for i in range(self.le) if self.name[i] not in exist]
 		self.__pt(len(self.l))
 		self.__mian=nThread(n=n,waits=waits)
 	
@@ -90,6 +93,10 @@ class nDown:
 		else:
 			res=gt(url,self.proxies,h)
 			open(name,'wb').write(res.content)
+		if self.test7z:
+			od='7z t "'+name+'"'
+			odd=('move "'+name+'" "'+name+'.err_def"') if sh(od) else ('echo \'\' > "'+name+'.sve_def"')
+			sh(odd)
 
 		return float(time.time())-a
 
