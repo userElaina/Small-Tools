@@ -3,7 +3,6 @@
 
 `HEADERS`
 
-	>>> import os
 	>>> import re
 	>>> import time
 	>>> import requests
@@ -17,7 +16,6 @@
 	
 '''
 
-import os
 import re
 import time
 import requests

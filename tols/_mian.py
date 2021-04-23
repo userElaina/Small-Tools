@@ -5,6 +5,8 @@ from os import system as sh
 from random import choice as rd
 from time import sleep as slp
 from typing import Union
+from copy import copy as cp
+from copy import deepcopy as dcp
 
 num_type=Union[int,float,str,]
 num_types=(int,float,str,)
@@ -31,7 +33,7 @@ def lot(l:list)->str:
 def tm(x:float=None,_=False)->str:
 	if not x:
 		x=time.time()
-	return time.strftime('%Y-%m-%d_%H:%M:%S' if _ else '%Y%m%d%H%M%S',time.localtime(x))
+	return time.strftime('%Y-%m-%d|%H:%M:%S' if _ else '%Y%m%d%H%M%S',time.localtime(x))
 	
 def trys(c:type,s:all,default=None)->all:
 	try:

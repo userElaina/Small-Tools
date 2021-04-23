@@ -28,7 +28,6 @@ def qrcode(s:str,pth:str,v:int=13,lv:str='H',pic:str=None):
 			brightness=1.0,
 			save_name=pth,
 		)
-	return pth
 
 if __name__=='__main__':
 	qrcode('qwq','qwq2.png',)

@@ -3,7 +3,9 @@
 
 `jsot` `sve` `opens` `openls` `openjs`
 
-`os` `time` `json` `Union` `sh` `rd` `slp`
+`os` `time` `json` `Union`
+
+`sh` `rd` `slp` `cp` `dcp`
 
 `num` `set` `byte` `bytes` `in`
 
@@ -11,9 +13,12 @@
 	>>> import time
 	>>> import json
 	>>> from typing import Union
+	
 	>>> from os import system as sh
 	>>> from random import choice as rd
 	>>> from time import sleep as slp
+	>>> from copy import copy as cp
+	>>> from copy import deepcopy as dcp
 
 	>>> [num]   int,float,str,
 	>>> [set]   list,set,tuple,
