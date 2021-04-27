@@ -1,5 +1,5 @@
 import requests
-from tols.downs._thread import *
+from tols.down._thread import *
 from tols._u import HEADERS
 
 gh=lambda u,px,h:requests.head(u,proxies=px,headers=h) if px else requests.head(u,headers=h)
